@@ -14,8 +14,8 @@ public class ReturnBookControl implements IReturnBookControl {
 
 	private ControlStateConstants controlState;
 
-	private ILibrary library;
-	private ILoan currentLoan;
+	ILibrary library;
+	ILoan currentLoan;
 
 	public ReturnBookControl(ILibrary library) {
 		this.library = library;

@@ -5,11 +5,16 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import static org.junit.Assert.assertTrue;
+
 import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import static org.mockito.Mockito.verify;
-import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.Mockito.atLeast;
+import static org.mockito.Mockito.times;
+import static org.mockito.ArgumentMatchers.*;
 
 import library.entities.ICalendar;
 import library.entities.ILibrary;
@@ -18,6 +23,7 @@ import library.entities.helpers.CalendarFileHelper;
 import library.entities.helpers.LibraryFileHelper;
 import library.entities.helpers.LoanHelper;
 import library.entities.helpers.PatronHelper;
+import library.returnbook.ReturnBookControl.ControlStateConstants;
 
 
 
@@ -38,6 +44,8 @@ class Bug1SimplificationTest {
     
     @BeforeEach
     void setUp() throws Exception {
+        MockitoAnnotations.initMocks(this);
+        
         LibraryFileHelper libraryHelper = new LibraryFileHelper(new BookHelper(), new PatronHelper(), new LoanHelper());
         CalendarFileHelper calendarHelper = new CalendarFileHelper();
 
@@ -54,8 +62,9 @@ class Bug1SimplificationTest {
         // Act
         returnBookControl.bookScanned(barcode);
         // Assert
-        verify(ui).display(anyString());
+        verify(ui, times(2)).display(anyString());
         verify(ui).setState(IReturnBookUI.UIStateConstants.INSPECTING);
+        assertTrue(returnBookControl.controlState == ReturnBookControl.ControlStateConstants.INSPECTING);
     }
 
 }

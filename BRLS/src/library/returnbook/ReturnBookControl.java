@@ -8,11 +8,11 @@ public class ReturnBookControl implements IReturnBookControl {
 
 	private IReturnBookUI returnBookUI;
 
-	private enum ControlStateConstants {
+	enum ControlStateConstants {
 		INITIALISED, READY, INSPECTING
 	};
 
-	private ControlStateConstants controlState;
+	ControlStateConstants controlState;
 
 	ILibrary library;
 	ILoan currentLoan;

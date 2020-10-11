@@ -59,10 +59,11 @@ class Bug1SimplificationTest {
     void testBug1() {
         // Arrange
         int barcode = 1;
+        double i = 0.0;
         // Act
         returnBookControl.bookScanned(barcode);
         // Assert
-        double i = 0.0;
+        
         assertFalse(i == library.getPatronById(1).getFinesPayable());
         //verify(ui, times(2)).display(anyString());
         //verify(ui).setState(IReturnBookUI.UIStateConstants.INSPECTING);

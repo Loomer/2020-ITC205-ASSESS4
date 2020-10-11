@@ -5,7 +5,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
@@ -62,9 +62,11 @@ class Bug1SimplificationTest {
         // Act
         returnBookControl.bookScanned(barcode);
         // Assert
-        verify(ui, times(2)).display(anyString());
-        verify(ui).setState(IReturnBookUI.UIStateConstants.INSPECTING);
-        assertTrue(returnBookControl.controlState == ReturnBookControl.ControlStateConstants.INSPECTING);
+        double i = 0.0;
+        assertFalse(i == library.getPatronById(1).getFinesPayable());
+        //verify(ui, times(2)).display(anyString());
+        //verify(ui).setState(IReturnBookUI.UIStateConstants.INSPECTING);
+        //assertTrue(returnBookControl.controlState == ReturnBookControl.ControlStateConstants.INSPECTING);
     }
 
 }
